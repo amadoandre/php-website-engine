@@ -15,7 +15,7 @@ abstract class BusinessService
         $this->dbCon = $dbCon;
     }
 
-    public final static function getInstance(): static
+    final public static function getInstance(): static
     {
         if (self::$instance == null) {
             self::$instance = new static(DataBaseConnector::getInstance());

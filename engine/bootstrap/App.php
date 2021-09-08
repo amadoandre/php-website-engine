@@ -1,9 +1,6 @@
 <?php
-require 'vendor/autoload.php';
 
-namespace bootstrap;
-
-
+namespace engine\bootstrap;
 
 use engine\config\ConfigBoot;
 use engine\http\request\Request;
@@ -12,6 +9,10 @@ use engine\route\Route;
 
 class App
 {
+    public static function get(): App
+    {
+        return new App();
+    }
 
     public function boot(ConfigBoot $configBoot, ModuleBoot $module)
     {
@@ -26,5 +27,3 @@ class App
         echo $buffer_logs;
     }
 }
-
-return new App();

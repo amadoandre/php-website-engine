@@ -2,6 +2,7 @@
 
 namespace engine\view;
 
+use engine\config\AppConfig;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
@@ -12,7 +13,7 @@ abstract class TemplateView implements IView
 
     public function __construct()
     {
-        $this->twig = new Environment(new FilesystemLoader(__DIR__ . '/../../resources/templates'));
+        $this->twig = new Environment(new FilesystemLoader(AppConfig::getInstance()->getTemplateFolder()));
         $this->twig->addFunction(new TwigFunction('asset', function ($asset) {
             // implement whatever logic you need to determine the asset path
 

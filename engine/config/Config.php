@@ -10,7 +10,7 @@ use RuntimeException;
 abstract class Config implements IConfig
 {
 
-    private static $instance;
+    private static $instances = array();
     private array $configs;
 
     protected const STRING ='STRING';
@@ -23,21 +23,21 @@ abstract class Config implements IConfig
         $this->validate();
     }
 
-    public final static function create(array $configs): IConfig
+    final public static function create(array $configs): IConfig
     {
-        if (self::$instance != null) {
+        if (( self::$instances[static::class] ?? null ) != null) {
             throw new RuntimeException("Config already created: " . static::class);
         }
-        self::$instance = new static($configs);
-        return self::$instance;
+        self::$instances[static::class] = new static($configs);
+        return self::$instances[static::class];
     }
 
-    public final  static function getInstance(): static
+    final public static function getInstance(): static
     {
-        if (self::$instance == null) {
+        if (( self::$instances[static::class] ?? null ) == null) {
             throw new RuntimeException("No config created: " . static::class);
         }
-        return self::$instance;
+        return self::$instances[static::class];
     }
 
     protected function getValue(string $name): ?string

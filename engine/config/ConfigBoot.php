@@ -12,7 +12,7 @@ abstract class ConfigBoot implements IBootable
     * example array( DbConfig::class => 'DB' );
     */
     abstract protected static function getConfigClasses(): array;
-    
+
     /**
     * @return string fullpath for configuration file
     */
@@ -22,6 +22,8 @@ abstract class ConfigBoot implements IBootable
     final public static function boot()
     {
         $confs = self::load(static::getConfigFile());
+        AppConfig::create($confs['MAIN'] ?? array());
+
         foreach (static::getConfigClasses() as $class => $confKey) {
             $class::create($confs[$confKey] ?? array());
         }
