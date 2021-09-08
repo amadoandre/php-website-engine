@@ -1,0 +1,24 @@
+{
+    "name": "andre-amado/php-website-engine",
+    "description": "php website-api engine",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andre Amado",
+            "email": "andre.amado@premium-minds.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "twig/twig" :"^3.0"
+      },
+      "autoload": {
+        "psr-4": {
+          "engine\\": "./engine/"
+        }
+      },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6"
+    }
+}
